@@ -10,9 +10,37 @@ function App() {
   const [filterTodo,setFilterTodo] = useState([]);
 
   useEffect(()=>{
-    filterHandler()
+    getLocalTodo();
+  },[]);
+
+
+  useEffect(()=>{
+    filterHandler();
+    saveLocalTodo();
   },[todos,filter]);
 
+  function saveLocalTodo()
+  {
+    localStorage.setItem("todos",JSON.stringify(todos));
+  }
+
+  function getLocalTodo()
+  {
+    if(localStorage.getItem("todos")===null)
+    {
+      localStorage.setItem("todos",JSON.stringify(todos));
+    }
+    else
+    {
+      let localTodo =JSON.parse(localStorage.getItem("todos"));
+      if(localTodo.length===0)
+      {
+        return null;
+      }
+      setTodos(localTodo);
+    }
+    
+  }
 
   function filterHandler()
   {
