@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Todo({text,todos,setTodos,todo}) {
+export default function Todo({text,todos,setTodos,todo,filterTodo}) {
     function deleteTodo(e)
     {
         setTodos(todos.filter((item)=> item.id !== todo.id));
